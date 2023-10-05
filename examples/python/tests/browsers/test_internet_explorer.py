@@ -64,7 +64,7 @@ def test_log_level(log_path):
 
 @pytest.mark.skipif(sys.platform != "win32", reason="requires Windows")
 def test_supporting_files(temp_dir):
-    service = webdriver.IeService(service_args=["–extract-path="+temp_dir])
+    service = webdriver.IeService(service_args=[f"–extract-path={temp_dir}"])
 
     driver = webdriver.Ie(service=service)
 

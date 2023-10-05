@@ -26,7 +26,7 @@ def chromedriver_path():
 @pytest.fixture(scope='function')
 def log_path():
     suffix = datetime.now().strftime("%y%m%d_%H%M%S")
-    log_path = 'log_file_' + suffix + '.log'
+    log_path = f'log_file_{suffix}.log'
 
     yield log_path
 
@@ -57,7 +57,7 @@ def firefox_driver():
 @pytest.fixture(scope='function')
 def log_path():
     suffix = datetime.now().strftime("%y%m%d_%H%M%S")
-    log_path = 'log_file_' + suffix + '.log'
+    log_path = f'log_file_{suffix}.log'
 
     yield log_path
 
@@ -71,9 +71,8 @@ def log_path():
 
 @pytest.fixture(scope='function')
 def addon_path():
-    if os.path.abspath("").endswith("tests"):
-        path = os.path.abspath("extensions/webextensions-selenium-example.xpi")
-    else:
-        path = os.path.abspath("tests/extensions/webextensions-selenium-example.xpi")
-
-    yield path
+    yield os.path.abspath(
+        "extensions/webextensions-selenium-example.xpi"
+    ) if os.path.abspath("").endswith("tests") else os.path.abspath(
+        "tests/extensions/webextensions-selenium-example.xpi"
+    )
